@@ -61,9 +61,12 @@ RSpec.describe Bowling do # rubocop:disable Metrics/BlockLength
                                       ])
     end
 
-    it 'can record a full game with spares' do
-      
-    end
+    # it 'can record a full game with spares' do
+    #   allow(bowling).to receive(:roll).and_return(5)
+    #   10.times { bowling.play_frame }
+    #   expect(bowling.scorecard).to eq([
+
+    # end
   end
 
   context 'Correct scoring for a full game' do
