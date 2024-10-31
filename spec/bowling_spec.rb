@@ -1,4 +1,5 @@
 require_relative '../lib/bowling'
+require 'pry'
 
 RSpec.describe Bowling do # rubocop:disable Metrics/BlockLength
   let(:bowling) { Bowling.new }
@@ -28,7 +29,7 @@ RSpec.describe Bowling do # rubocop:disable Metrics/BlockLength
 
     it 'can play a frame with a strike' do
       allow(bowling).to receive(:roll).and_return(10)
-      expect(bowling.play_frame).to eq([%w[X]])
+      expect(bowling.play_frame).to eq([%w[0 X]])
     end
 
     it 'can play a frame with no pins knocked down' do
@@ -37,7 +38,7 @@ RSpec.describe Bowling do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  context 'Full Game of Bowling' do
+  context 'Full Game of Bowling' do # rubocop:disable Metrics/BlockLength
     it 'can record two frames' do
       allow(bowling).to receive(:roll).and_return(4)
       2.times { bowling.play_frame }
@@ -78,6 +79,7 @@ RSpec.describe Bowling do # rubocop:disable Metrics/BlockLength
 
     it 'can record the correct score for a game with spares' do
       allow(bowling).to receive(:roll).and_return(5)
+      # binding.pry
       10.times { bowling.play_frame }
       expect(bowling.game_score).to eq(150)
     end

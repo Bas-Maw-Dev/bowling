@@ -8,16 +8,14 @@ class Bowling # rubocop:disable Style/Documentation
   end
 
   def roll(pins)
-    pins_down = rand(0..pins)
-    pins_down = 'X' if pins_down == 10
-    pins_down
+    rand(0..pins)
   end
 
   def display_frame(score)
-    @game_score += score.sum
-    return @scorecard << ['X'] if score[0] == 10
+    add_score(score)
+    return strike if score[0] == 10
+    return spare(score[0]) if score[0] + score[1] == 10
 
-    score = [score[0], '/'] if score[0] + score[1] == 10
     @scorecard << score.map(&:to_s)
   end
 
@@ -27,5 +25,17 @@ class Bowling # rubocop:disable Style/Documentation
 
     roll_two = roll(10 - roll_one)
     display_frame([roll_one, roll_two])
+  end
+
+  def strike
+    @scorecard << %w[0 X]
+  end
+
+  def spare(roll_one)
+    @scorecard << %W[#{roll_one} /]
+  end
+
+  def add_score(score)
+    @game_score += score.sum
   end
 end
